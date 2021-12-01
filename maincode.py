@@ -1,10 +1,5 @@
-'''
-In this program, a user can paint a simple picture on a 6x6 grid using turtle graphics.
-'''
-
 import turtle
 
-#main code
 def main():
   #sets up everthing
   print("PIXEL ART BOARD")
