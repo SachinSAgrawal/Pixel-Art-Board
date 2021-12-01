@@ -1,7 +1,7 @@
 # Pixel Art Board
 
-## Instructions:
-The pixel art board is broken into 36 sections in a 6 by 6 grid. For each of the sections, you will enter a 0 if you want it filled and a 1 if you do not want it filled. Please only enter 1s and 0s. The sections go across, then down to the next line. 
+## Instructions
+First enter a foreground color and a background color. Then the pixel art board will appear. It is broken into 36 sections in a 6 by 6 grid. For each of the sections, enter a 0 if you want it to be the foreground color and a 1 if you want it it to be the background color. Please only enter 1s and 0s. The sections go across, then down to the next line. 
 
 ## Examples
 Minecraft Creeper 
