@@ -14,26 +14,28 @@ def main():
 
     # Ask for background and foreground colors
     bgcolor = input("Please enter a color for the background: ")
-    maincolor = input("Please enter a color for the foreground: ")
+    fgcolor = input("Please enter a color for the foreground: ")
 
     # Set up the screen
-    wn = turtle.Screen()
-    wn.setup(300, 300)
-    wn.bgcolor(bgcolor)
+    window = turtle.Screen()
+    window.setup(300, 300)
+    window.bgcolor(bgcolor)
 
     # Create the turtle for drawing
     drawing_turtle = turtle.Turtle() 
     drawing_turtle.speed(0)  # Fastest drawing speed
     drawing_turtle.hideturtle()
-    drawing_turtle.color(maincolor)
+    drawing_turtle.color(fgcolor)
     drawing_turtle.up()
     drawing_turtle.goto(-150, 100)  # Position the turtle at the top left corner of the grid
     drawing_turtle.down()
 
     # Instructions
     print("The pixel art board is broken into 36 sections in a 6 by 6 grid. "
-          "For each section, enter 0 to fill it or 1 to leave it empty. "
-          "Please only enter 1s and 0s. See examples in the files section.")
+          "For each section, enter a 0 if you want it to be the foreground "
+          "color and a 1 if you want it to be the background color. "
+          "Please only enter 1s and 0s. The sections go across, then down "
+          "to the next line. See some examples in the README.md file.")
 
     # Draw the grid based on user input
     for row in range(6):
