@@ -8,63 +8,95 @@ In this program, a user can paint a simple picture on a 6x6 grid using turtle gr
 import turtle
 
 def main():
-    # Set up everything
-    print("PIXEL ART BOARD")
+    # Print program title and author
+    print("\nPIXEL ART BOARD")
     print("Made by Sachin")
 
-    # Ask for background and foreground colors
-    bgcolor = input("Please enter a color for the background: ")
-    fgcolor = input("Please enter a color for the foreground: ")
+    # Get user input for colors
+    bg_color = input("\nEnter a background color: ")
+    fg_color = input("Enter a foreground color: ")
 
-    # Set up the screen
+    # Display instructions
+    print("\nThe pixel art board is broken into 36 sections in a 6 by 6 grid.\n"
+          "For each section, enter a 1 if you want it to be the foreground\n"
+          "color and a 0 if you want it to be the background color. The\n"
+          "sections go across, then down to the next line. The turtle will\n"
+          "be in the center of the section in question to help visualize your\n"
+          "place. See some examples in the README.md file.\n")
+
+    # Set up the turtle screen
     window = turtle.Screen()
-    window.setup(300, 300)
-    window.bgcolor(bgcolor)
+    window.setup(500, 500)
+    window.bgcolor(bg_color)
 
-    # Create the turtle for drawing
+    # Create a turtle object
     drawing_turtle = turtle.Turtle() 
-    drawing_turtle.speed(0)  # Fastest drawing speed
-    drawing_turtle.hideturtle()
-    drawing_turtle.color(fgcolor)
+
+    # Set speed and color
+    drawing_turtle.speed(0)
+    drawing_turtle.color(fg_color)
+
+    # Draw the border around the grid
     drawing_turtle.up()
-    drawing_turtle.goto(-150, 100)  # Position the turtle at the top left corner of the grid
+    drawing_turtle.goto(-150, 150)
     drawing_turtle.down()
+    drawing_turtle.pensize(2)  # Make the border thicker
+    for _ in range(4):
+        drawing_turtle.forward(300)
+        drawing_turtle.right(90)
+    drawing_turtle.pensize(1)  # Reset pen size
+    drawing_turtle.shape("turtle")
 
-    # Instructions
-    print("The pixel art board is broken into 36 sections in a 6 by 6 grid. "
-          "For each section, enter a 0 if you want it to be the foreground "
-          "color and a 1 if you want it to be the background color. "
-          "Please only enter 1s and 0s. The sections go across, then down "
-          "to the next line. See some examples in the README.md file.")
-
-    # Draw the grid based on user input
+    # Move turtle along grid
     for row in range(6):
         for col in range(6):
-            sections(drawing_turtle)  # Draw each section
-            drawing_turtle.forward(50)  # Move to the next section
+            drawing_turtle.up()
+            drawing_turtle.goto(-150 + col * 50 + 25, 150 - row * 50 - 25)
+            drawing_turtle.down()
 
-        # Move to the start of the next row
-        drawing_turtle.up()
-        drawing_turtle.goto(-150, drawing_turtle.ycor() - 50)
-        drawing_turtle.down()
+            # Determine what to do for each section
+            sections(drawing_turtle)  
 
-    # Finalization
-    print("You are done! Feel free to screenshot your image.")
+    # Hide the turtle because finished
+    drawing_turtle.hideturtle()
+    print("You are done! Feel free to screenshot your image.\n")
+    turtle.done()
 
-# Function to draw each section based on user input
+# Function to handle logic for each section
 def sections(turtle):
-    turtle.down()
-    section = int(input("Next Section: "))  # Ask user whether to fill the section or not
-    if section == 0:
+    
+    # Get user input for the section
+    while True:
+        user_input = input("Next Section: ")
+        # Check if the input is a numeric string
+        if user_input.isdigit():  
+            int_input = int(user_input)
+            # Check if the input is either 0 or 1
+            if int_input in [0, 1]:
+                break
+            else:
+                print("Invalid input. Please enter either 0 or 1.")
+        else:
+            print("Invalid input. Please enter a numeric value.")
+
+    # Fill in the section if specified
+    if int_input == 1:
+        # Move turtle to correct position
+        turtle.up()
+        turtle.left(180)
+        turtle.forward(25)
+        turtle.left(90)
+        turtle.forward(25)
+        turtle.left(90)
+        turtle.down()
+
+        # Draw and fill in the square
         turtle.begin_fill()
-        for _ in range(4):  # Draw a square
+        for _ in range(4):  
             turtle.forward(50)
             turtle.left(90)
-        turtle.end_fill()
-    else:
-        turtle.up()  # Move the turtle without drawing
-        turtle.down()
-    turtle.up()  # Lift the pen
+        turtle.end_fill() 
 
+# Entry point of the program
 if __name__ == "__main__":
     main()
